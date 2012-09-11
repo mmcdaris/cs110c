@@ -18,4 +18,5 @@
 #include <stdlib.h>
 
 
-cout << "yo, u  missing a header"
+cout << "yo, u  missing a header";
+cin >> getem;
