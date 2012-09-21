@@ -1,51 +1,60 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 
 using namespace std;
 int findMedian (int anArray[], int first, int last, int length);
-void swapIntArray (int& anArray[], int x, int y);
+void swapIntArray (int anArray[], int x, int y);
 
 int main()
 {
 	int length; // length of the array
   bool escape = false;
   bool odd = false;
-  char yn;
+  string yn;
+  int array;
   
   while (escape == false)
   {
     cout << "Enter the number of items (please enter an odd number): ";
     cin >> length;
-    if(length%2 == 0 )
+    
+    // length is ODD, begin the collection!
+    if( length % 2 != 0 )
     {
-
+      cout << "Enter " << length << " integers:";
+      for(int i=0;i<length;i++)
+      {
+        cin >> array;
+      }
     }
-    else
+
+    else // length is EVEN
     {
       cout << length << " is not an odd number.";
     }
-
-  }
-
-
-  } while (escape == false);
+    
+    cout << "Go again (y/n)? "; // quit?
+    cin >> yn;
+    if(yn.find("y"))
+      escape = true;
   
-  // int array[9] ={ 16, 2, 77, 40, 12, 25,71, 84, 35 };
-	// 35 should be median
-	// cout << '\n' << findMedian (array, 0, 8, 9);
+  } // end of while loop
+
 	return(0);
+
 }
 
 /************************************************
 |                  findMedian                   |
 | Finds the Median in an array and returns it!  |
+| PRE: Int array w/ odd number of elements      |
+| POST: returns the median of the array         |
 ************************************************/
 
 int findMedian (int anArray[], int first, int last, int length)
 {
-	// Pre Conditions: requires an integer array, requires an array with an odd number of elements
-	// Post Conditions: returns the pivot value if its the median
 	// first is the start of the sub array, last is the end of the sub array
 	
 	int pivot = first;        // index of pivot
