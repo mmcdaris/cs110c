@@ -28,6 +28,7 @@ int main()
       for(int i=0;i<length;i++)
       {
         cin >> array[i];
+        cin.clear();
       }
       // quickSort the array
       getArray(array, length);// array output for debugging
@@ -41,8 +42,10 @@ int main()
     cout << "Go again (y/n)? "; // quit?
     
     cin >> yn;
-    if(yn.find("y"))
+    if(&yn[0] == "y")
+    { 
       escape = true;
+    }
   } // end of while loop
 
 	return(0);
@@ -55,7 +58,6 @@ int main()
 | PRE: Int array w/ odd number of elements      |
 | POST: returns the median of the array         |
 ************************************************/
-
 int findMedian (int anArray[], int first, int last, int length)
 {
 	// first is the start of the sub array, last is the end of the sub array
