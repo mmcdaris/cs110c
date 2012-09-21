@@ -6,6 +6,8 @@
 using namespace std;
 int findMedian (int anArray[], int first, int last, int length);
 void swapIntArray (int anArray[], int x, int y);
+void getArray(int anArray[],int length);
+
 
 int main()
 {
@@ -13,7 +15,7 @@ int main()
   bool escape = false;
   bool odd = false;
   string yn;
-  int array;
+  int array [0];
   
   while (escape == false)
   {
@@ -26,20 +28,22 @@ int main()
       cout << "Enter " << length << " integers:";
       for(int i=0;i<length;i++)
       {
-        cin >> array;
+        cin >> array[i];
       }
+      // quickSort the array
+      getArray(array, length);// array output for debugging
     }
 
     else // length is EVEN
     {
-      cout << length << " is not an odd number.";
+      cout << length << " is not an odd number.\n";
     }
     
     cout << "Go again (y/n)? "; // quit?
+    
     cin >> yn;
     if(yn.find("y"))
       escape = true;
-  
   } // end of while loop
 
 	return(0);
@@ -117,3 +121,17 @@ function quicksort('array')
       return concatenate(quicksort('less'), 'pivot', quicksort('greater')) // two recursive calls
 */
 
+
+/******************************************************
+|                  getArray                           |
+| Pass by reference w/ size, couts the array          |
+******************************************************/
+
+void getArray(int anArray[],int length)
+{
+  for(int i=0;i<length;i++)
+  {
+    cout << anArray[i] << " ";
+  }
+  cout << endl;
+}
