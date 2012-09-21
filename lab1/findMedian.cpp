@@ -14,7 +14,6 @@ int main()
 	int length; // length of the array
   bool escape = false;
   string yn;
-  int array [0];
   
   while (escape == false)
   {
@@ -24,6 +23,8 @@ int main()
     // length is ODD, begin the collection!
     if( length % 2 != 0 )
     {
+      int* array = new int[length]; // new dynamic integer array
+
       cout << "Enter " << length << " integers:";
       for(int i=0;i<length;i++)
       {
@@ -32,6 +33,8 @@ int main()
       }
       // quickSort the array
       getArray(array, length);// array output for debugging
+      
+      delete [] array; // delete dynamic array
     }
 
     else // length is EVEN
@@ -40,9 +43,10 @@ int main()
     }
     
     cout << "Go again (y/n)? "; // quit?
-    
+   
+    cin.clear();
     cin >> yn;
-    if(&yn[0] == "y")
+    if(!(yn[0] == 'y')) // must be 'y', "y" raises a compile error
     { 
       escape = true;
     }
