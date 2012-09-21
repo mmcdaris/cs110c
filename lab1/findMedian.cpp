@@ -13,7 +13,6 @@ int main()
 {
 	int length; // length of the array
   bool escape = false;
-  bool odd = false;
   string yn;
   int array [0];
   
