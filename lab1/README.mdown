@@ -1,0 +1,51 @@
+CS 110C
+Lab 1
+ 
+Revisions, 9/12/2012:
+1)    Changed under "To turn in" from "(both sets)" to "(all three sets)"
+2)    Added page numbers for fourth edition
+ 
+Purpose:  This lab will give you practice with writing/modifying a recursive function.
+           
+Background:  Wikipedia defines the median of a set of numbers as follows:
+
+"a median is described as the number separating the higher half of a sample, a population, or a probability distribution, from the lower half. The median of a finite list of numbers can be found by arranging all the observations from lowest value to highest value and picking the middle one. If there is an even number of observations, the median is not unique, so one often takes the mean of the two middle values."
+
+In order to find the median of an odd number of items:
+  we could sort all of the items and report the middle value.  
+However, 
+  kSmall (discussed on pages 98-102 and pages 473-474 of the text)
+    recursively finds the kth smallest value in an array of items
+    If we choose `k` to be `n / 2` rounded up 
+      where `n` is the `number of items`, 
+      we can find the median value of a set of items 
+      **without sorting all of the items**
+ 
+##Lab
+
+Implement kSmall and use the function that you write to determine and display the median value of a set of integers, stored in an array.  Let the user of the program input an odd number of items, and report their median using kSmall.
+ 
+Hint:  Consider modifying the existing code for quicksort, pages 479-481 of the text (pages 478-479 in the fourth edition).
+ 
+Sample dialog:
+ 
+Enter the number of items (please enter an odd number):  9
+Enter 9 integers:  20  30  10  -40  80  0  25  15  60
+The median value is 20.
+Go again (y/n)?  y
+ 
+Enter the number of items (please enter an odd number):  12
+12 is not an odd number.
+Enter the number of items (please enter an odd number):  11
+Enter 11 integers:  27  35  48  15  -46  -58  5  26  58  -2  25
+The median value is 25.
+Go again (y/n)?  y
+ 
+
+ 
+Enter the number of items (please enter an odd number):  9
+Enter 9 integers:  80  60  30  25  20  15  10  0  -40
+The median value is 20.
+Go again (y/n)?  n
+ 
+To turn in:  Submit your program listing and a capture of a program run, including the exact data shown above (all three sets), on Insight.  Be sure to follow the guidelines given in the Lab Grading handout.
