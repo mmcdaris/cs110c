@@ -11,9 +11,19 @@ Background:  Wikipedia defines the median of a set of numbers as follows:
 
 "a median is described as the number separating the higher half of a sample, a population, or a probability distribution, from the lower half. The median of a finite list of numbers can be found by arranging all the observations from lowest value to highest value and picking the middle one. If there is an even number of observations, the median is not unique, so one often takes the mean of the two middle values."
 
-In order to find the median of an odd number of items, we could sort all of the items and report the middle value.  However, kSmall, discussed on pages 98-102 and pages 473-474 of the text (pages 88-92 and page 472 in the fourth edition) recursively finds the kth smallest value in an array of items without sorting all of the items.  If we choose k to be n / 2 rounded up, where n is the number of items, we can find the median value of a set of items (without sorting all of the items).
+In order to find the median of an odd number of items:
+  we could sort all of the items and report the middle value.  
+However, 
+  kSmall (discussed on pages 98-102 and pages 473-474 of the text)
+    recursively finds the kth smallest value in an array of items
+    If we choose `k` to be `n / 2` rounded up 
+      where `n` is the `number of items`, 
+      we can find the median value of a set of items 
+      **without sorting all of the items**
  
-Lab:   Implement kSmall and use the function that you write to determine and display the median value of a set of integers, stored in an array.  Let the user of the program input an odd number of items, and report their median using kSmall.
+##Lab
+
+Implement kSmall and use the function that you write to determine and display the median value of a set of integers, stored in an array.  Let the user of the program input an odd number of items, and report their median using kSmall.
  
 Hint:  Consider modifying the existing code for quicksort, pages 479-481 of the text (pages 478-479 in the fourth edition).
  
