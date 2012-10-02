@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <ctime>
 #include <string>
-
 using namespace std;
 void quickSort (int anArray[], int first, int last, int length, bool &medianFound);
 void swapIntArray (int anArray[], int x, int y);
@@ -34,9 +33,7 @@ int main()
         cin.clear();
       }
       // quickSort the array
-      getArray(array, length);// array output for debugging
 	    median = findMedian(array, 0, (length - 1));
-	    getArray(array, length);
 	    cout << "Median:" << median << endl;
       
       delete [] array; // delete dynamic array
@@ -73,7 +70,7 @@ int findMedian(int anArray[], int first, int last)
 	bool medianFound = false;
 	quickSort(anArray, first, last, last, medianFound); //the 2nd last is the length
 	if(medianFound == true)
-		median = anArray[((last - 1) / 2)];
+		median = anArray[((last) / 2)];
 	else
 		median = -1;
 	return(median);
@@ -104,7 +101,7 @@ void swapIntArray(int anArray[], int x, int y)
 void quickSort (int anArray[], int first, int last, int length, bool &medianFound)
 {
 	// first is the start of the sub array, last is the end of the sub array
-	
+
 	int pivot = first;            // index of pivot
 	int startS1 = first + 1;      // starting of S1, which is the index of elements in anArray which are less than the pivot
 	int endS1 = first + 1;        // starting of S2, which is the index of elements in anArray which are greater than the pivot, this is also the end of S1
@@ -126,10 +123,9 @@ void quickSort (int anArray[], int first, int last, int length, bool &medianFoun
 	}
 	swapIntArray(anArray, pivot, endS1-1); //endS1 -1 is the last element in the S1 subarray, doing this moves the pivot to the middle
 	pivot = endS1 -1; //used to check for median
-	if (pivot == ((length-1)/2))	//length/2 gets the middle of the array
+	if (pivot == ((length)/2))	//length/2 gets the middle of the array
 	{
 		 medianFound = true;
-		 cout<<pivot;
 		 return;
 	}
 	else
@@ -137,7 +133,7 @@ void quickSort (int anArray[], int first, int last, int length, bool &medianFoun
 		quickSort(anArray, first, pivot - 1, length, medianFound); //quick sorts S1
 		quickSort(anArray, pivot + 1, last, length, medianFound); //quick sorts S2
 	}
-	
+
 }
 
 
