@@ -4,16 +4,17 @@
 #include <string>
 
 using namespace std;
-void quickSort (int &anArray[], int first, int last, int length, bool &medianFound);
-void swapIntArray (int &anArray[], int x, int y);
+void quickSort (int anArray[], int first, int last, int length, bool &medianFound);
+void swapIntArray (int anArray[], int x, int y);
 void getArray(int anArray[],int length);
-int findMedian(int &anArray[], int first, int last);
+int findMedian(int anArray[], int first, int last);
 
 
 int main()
 {
 	int length; // length of the array
   bool escape = false;
+  int median;
   string yn;
   
   while (escape == false)
@@ -34,6 +35,9 @@ int main()
       }
       // quickSort the array
       getArray(array, length);// array output for debugging
+	  median = findMedian(array,0, length);
+	  getArray(array, length);
+	  cout<< median;
       
       delete [] array; // delete dynamic array
     }
@@ -63,12 +67,15 @@ int main()
 | PRE: Int array w/ odd number of elements      |
 | POST: returns the median of the array         |
 ************************************************/
-int findMedian(int &anArray[], int first, int last)
+int findMedian(int anArray[], int first, int last)
 {
 	int median;
 	bool medianFound = false;
 	quickSort(anArray, first, last, (last - first), medianFound);
-	median = anArray[((first+last)/2)];
+	if(medianFound == true)
+		median = anArray[((first+last)/2)];
+	else
+		median = -1;
 	return(median);
 }
 
@@ -78,7 +85,7 @@ int findMedian(int &anArray[], int first, int last)
 | swaps the values of array[x] and array[y]           |
 | Return: void                                        |
 ******************************************************/
-void swapIntArray(int &anArray[], int x, int y)
+void swapIntArray(int anArray[], int x, int y)
 {
 	//pre : requires an integer array, X and Y must be in the array
 	//post: swaps the X and Y elements of anArray
@@ -105,7 +112,7 @@ function quicksort('array')
           else append 'x' to 'greater'
       return concatenate(quicksort('less'), 'pivot', quicksort('greater')) // two recursive calls
 */
-void quickSort (int &anArray[], int first, int last, int length, bool &medianFound)
+void quickSort (int anArray[], int first, int last, int length, bool &medianFound)
 {
 	// first is the start of the sub array, last is the end of the sub array
 	
@@ -115,9 +122,9 @@ void quickSort (int &anArray[], int first, int last, int length, bool &medianFou
                             
   // if first is equal to last, then we have hit a base case, this occures if there is only one element in the subarray and it is not the median
 
-	if((first => last) || (medianFound)) //median found stops the function from recursing if the median has been found in a previous recursion
+	if((first >= last) || (medianFound)) //median found stops the function from recursing if the median has been found in a previous recursion
 	{
-			return();
+			return;
 	}
 
 	for(int i = startS1; i<=last; i++) // checks if the value is less than the pivot, if it is then its moved towards the left of the array populating S1
@@ -130,12 +137,16 @@ void quickSort (int &anArray[], int first, int last, int length, bool &medianFou
 	}
 	swapIntArray(anArray, pivot, endS1-1); //endS1 -1 is the last element in the S1 subarray, doing this moves the pivot to the middle
 	pivot = endS1 -1; //used to check for median
-	if (pivot == (length/2)) //length/2 gets the middle of the array
+	if (pivot == (length/2))	//length/2 gets the middle of the array
+	{
 		 medianFound = true;
-		 return();
+		 return;
+	}
 	else
-		quickSort(anArray, first, endS1, length, medianFound); //quick sorts S1
+	{
+		quickSort(anArray, first, endS1 - 2, length, medianFound); //quick sorts S1
 		quickSort(anArray, endS1, last, length, medianFound); //quick sorts S2
+	}
 	
 }
 
