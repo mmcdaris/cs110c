@@ -163,3 +163,23 @@ void getArray(int anArray[], int length, int x, int y)
   }
   cout << endl;
 }
+/*
+Program Output:
+------------------------------------------------------------
+Admin$ ./a.out 
+Enter the number of items (please enter an odd number): 9
+Enter 9 integers:20  30  10  -40  80  0  25  15  60
+The median is value is 20.
+Go again (y/n)? y
+Enter the number of items (please enter an odd number): 12
+12 is not an odd number.
+Go again (y/n)? y
+Enter the number of items (please enter an odd number): 11
+Enter 11 integers:27  35  48  15  -46  -58  5  26  58  -2  25
+The median is value is 25.
+Go again (y/n)? y
+Enter the number of items (please enter an odd number): 9
+Enter 9 integers:80  60  30  25  20  15  10  0  -40
+The median is value is 20.
+Go again (y/n)? n
+*/
