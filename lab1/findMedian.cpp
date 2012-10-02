@@ -28,16 +28,16 @@ int main()
       int* array = new int[length]; // new dynamic integer array
 
       cout << "Enter " << length << " integers:";
-      for(int i=0;i<length;i++)
+      for(int i=0; i < length; i++)
       {
         cin >> array[i];
         cin.clear();
       }
       // quickSort the array
       getArray(array, length);// array output for debugging
-	  median = findMedian(array,0, length);
-	  getArray(array, length);
-	  cout<< median;
+	    median = findMedian(array, 0, (length - 1));
+	    getArray(array, length);
+	    cout << "Median:" << median << endl;
       
       delete [] array; // delete dynamic array
     }
@@ -101,30 +101,19 @@ void swapIntArray(int anArray[], int x, int y)
 | Pass by reference!                                  |
 ******************************************************/
 
-/*
-function quicksort('array')
-      if length('array') ? 1
-          return 'array'  // an array of zero or one elements is already sorted
-      select and remove a pivot value 'pivot' from 'array'
-      create empty lists 'less' and 'greater'
-      for each 'x' in 'array'
-          if 'x' ? 'pivot' then append 'x' to 'less'
-          else append 'x' to 'greater'
-      return concatenate(quicksort('less'), 'pivot', quicksort('greater')) // two recursive calls
-*/
 void quickSort (int anArray[], int first, int last, int length, bool &medianFound)
 {
 	// first is the start of the sub array, last is the end of the sub array
 	
-	int pivot = first;        // index of pivot
+	int pivot = first;            // index of pivot
 	int startS1 = first + 1;      // starting of S1, which is the index of elements in anArray which are less than the pivot
-	int endS1 = first + 1;    // starting of S2, which is the index of elements in anArray which are greater than the pivot, this is also the end of S1
+	int endS1 = first + 1;        // starting of S2, which is the index of elements in anArray which are greater than the pivot, this is also the end of S1
                             
   // if first is equal to last, then we have hit a base case, this occures if there is only one element in the subarray and it is not the median
 
 	if((first >= last) || (medianFound)) //median found stops the function from recursing if the median has been found in a previous recursion
 	{
-			return;
+	  return;
 	}
 
 	for(int i = startS1; i<=last; i++) // checks if the value is less than the pivot, if it is then its moved towards the left of the array populating S1
