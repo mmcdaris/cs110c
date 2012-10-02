@@ -5,23 +5,23 @@
 using namespace std;
 void quickSort (int anArray[], int first, int last, int length, bool &medianFound);
 void swapIntArray (int anArray[], int x, int y);
-void getArray(int anArray[],int length);
+void getArray(int anArray[],int length, int x, int y); //used for debugging
 int findMedian(int anArray[], int length);
 
 
 int main()
 {
-	int length; // length of the array
-  bool escape = false;
-  int median;
-  string yn;
+	int length;           // length of the array
+  bool escape = false;  // controls escape
+  int median;           // returns the median as an int to be displayed
+  string yn;            // user prompt string
   
   while (escape == false)
   {
     cout << "Enter the number of items (please enter an odd number): ";
     cin >> length;
     
-    // length is ODD, begin the collection!
+    // If length is ODD, begin the collection!
     if( length % 2 != 0 )
     {
       int* array = new int[length]; // new dynamic integer array
@@ -32,10 +32,8 @@ int main()
         cin >> array[i];
         cin.clear();
       }
-      // quickSort the array
-	    median = findMedian(array, (length -1));
-	    cout << "Median:" << median << endl;
-      
+      // findMedian uses quickSort to find the median
+	    cout << "The median is value is " << findMedian(array, (length -1)) << "." << endl;
       delete [] array; // delete dynamic array
     }
 
@@ -44,8 +42,7 @@ int main()
       cout << length << " is not an odd number.\n";
     }
     
-    cout << "Go again (y/n)? "; // quit?
-   
+    cout << "Go again (y/n)? "; // continue?
     cin.clear();
     cin >> yn;
     if(!(yn[0] == 'y')) // must be 'y', "y" raises a compile error
@@ -93,7 +90,7 @@ void swapIntArray(int anArray[], int x, int y)
 {
 	//pre : requires an integer array, X and Y must be in the array
 	//post: swaps the X and Y elements of anArray
-	int tempX = anArray[x];
+  int tempX = anArray[x];
 	int tempY = anArray[y];
 	anArray[x] = tempY;
 	anArray[y] = tempX;
@@ -132,10 +129,11 @@ void quickSort (int anArray[], int first, int last, int length, bool &medianFoun
 			endS1 = endS1 + 1;
 		}
 	}
+  
 	swapIntArray(anArray, pivot, endS1-1); //endS1 -1 is the last element in the S1 subarray, doing this moves the pivot to the middle
-	pivot = endS1 -1; //used to check for median
-	quickSort(anArray, first, pivot - 1, length, medianFound); //quick sorts S1
-	quickSort(anArray, pivot + 1, last, length, medianFound); //quick sorts S2
+	
+  quickSort(anArray, first, (endS1 - 1), length, medianFound); //quick sorts S1
+	quickSort(anArray, endS1, last, length, medianFound); //quick sorts S2
 }
 
 
@@ -144,34 +142,14 @@ void quickSort (int anArray[], int first, int last, int length, bool &medianFoun
 | Pass by reference w/ size, couts the array          |
 ******************************************************/
 
-void getArray(int anArray[],int length)
+void getArray(int anArray[], int length, int x, int y)
 {
   for(int i=0;i<length;i++)
   {
-    cout << anArray[i] << " ";
+    if((i == x) ||(i == y))
+      cout << "|" << anArray[i] << "| ";
+    else
+      cout << "'" << anArray[i] << "' ";
   }
   cout << endl;
 }
-
-/*
-The output for this code
-
-
-[aluk@hills ~]$ a.out
-Enter the number of items (please enter an odd number): 9
-Enter 9 integers:20 30 10 -40 80 0 25 15 60
-Median:20
-Go again (y/n)? y
-Enter the number of items (please enter an odd number): 11
-Enter 11 integers:27 35 48 15 -46 -58 5 26 58 -2 25
-Median:25
-Go again (y/n)? y
-Enter the number of items (please enter an odd number): 9
-Enter 9 integers:80 60 30 25 20 15 10 0 -40
-Median:20
-Go again (y/n)? y
-Enter the number of items (please enter an odd number): 3
-Enter 3 integers:1 5 3
-Median:3
-Go again (y/n)? n
-*/
