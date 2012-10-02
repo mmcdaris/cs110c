@@ -6,7 +6,7 @@ using namespace std;
 void quickSort (int anArray[], int first, int last, int length, bool &medianFound);
 void swapIntArray (int anArray[], int x, int y);
 void getArray(int anArray[],int length);
-int findMedian(int anArray[], int first, int last);
+int findMedian(int anArray[], int length);
 
 
 int main()
@@ -33,7 +33,7 @@ int main()
         cin.clear();
       }
       // quickSort the array
-	    median = findMedian(array, 0, (length - 1));
+	    median = findMedian(array, (length -1));
 	    cout << "Median:" << median << endl;
       
       delete [] array; // delete dynamic array
@@ -64,13 +64,20 @@ int main()
 | PRE: Int array w/ odd number of elements      |
 | POST: returns the median of the array         |
 ************************************************/
-int findMedian(int anArray[], int first, int last)
+int findMedian(int anArray[], int length)
 {
 	int median;
 	bool medianFound = false;
-	quickSort(anArray, first, last, last, medianFound); //the 2nd last is the length
+	if(length <= 0)
+	{
+		medianFound = true;
+	}
+	else
+	{
+		quickSort(anArray, 0, length, length, medianFound);//first length is the last element in the set of data of anArray
+	}
 	if(medianFound == true)
-		median = anArray[((last) / 2)];
+		median = anArray[((length) / 2)];
 	else
 		median = -1;
 	return(median);
