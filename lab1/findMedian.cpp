@@ -117,7 +117,11 @@ void quickSort (int anArray[], int first, int last, int length, bool &medianFoun
 
 	if((first >= last) || (medianFound)) //median found stops the function from recursing if the median has been found in a previous recursion
 	{
-	  return;
+		if(pivot == ((length)/2))
+		{
+			medianFound = true;
+		}
+		return;
 	}
 
 	for(int i = startS1; i<=last; i++) // checks if the value is less than the pivot, if it is then its moved towards the left of the array populating S1
@@ -130,17 +134,8 @@ void quickSort (int anArray[], int first, int last, int length, bool &medianFoun
 	}
 	swapIntArray(anArray, pivot, endS1-1); //endS1 -1 is the last element in the S1 subarray, doing this moves the pivot to the middle
 	pivot = endS1 -1; //used to check for median
-	if (pivot == ((length)/2))	//length/2 gets the middle of the array
-	{
-		 medianFound = true;
-		 return;
-	}
-	else
-	{
-		quickSort(anArray, first, pivot - 1, length, medianFound); //quick sorts S1
-		quickSort(anArray, pivot + 1, last, length, medianFound); //quick sorts S2
-	}
-
+	quickSort(anArray, first, pivot - 1, length, medianFound); //quick sorts S1
+	quickSort(anArray, pivot + 1, last, length, medianFound); //quick sorts S2
 }
 
 
@@ -157,3 +152,26 @@ void getArray(int anArray[],int length)
   }
   cout << endl;
 }
+
+/*
+The output for this code
+
+
+[aluk@hills ~]$ a.out
+Enter the number of items (please enter an odd number): 9
+Enter 9 integers:20 30 10 -40 80 0 25 15 60
+Median:20
+Go again (y/n)? y
+Enter the number of items (please enter an odd number): 11
+Enter 11 integers:27 35 48 15 -46 -58 5 26 58 -2 25
+Median:25
+Go again (y/n)? y
+Enter the number of items (please enter an odd number): 9
+Enter 9 integers:80 60 30 25 20 15 10 0 -40
+Median:20
+Go again (y/n)? y
+Enter the number of items (please enter an odd number): 3
+Enter 3 integers:1 5 3
+Median:3
+Go again (y/n)? n
+*/
