@@ -71,9 +71,9 @@ int findMedian(int anArray[], int first, int last)
 {
 	int median;
 	bool medianFound = false;
-	quickSort(anArray, first, last, (last - first), medianFound);
+	quickSort(anArray, first, last, last, medianFound); //the 2nd last is the length
 	if(medianFound == true)
-		median = anArray[((first+last)/2)];
+		median = anArray[((last - 1) / 2)];
 	else
 		median = -1;
 	return(median);
@@ -137,7 +137,7 @@ void quickSort (int anArray[], int first, int last, int length, bool &medianFoun
 	}
 	swapIntArray(anArray, pivot, endS1-1); //endS1 -1 is the last element in the S1 subarray, doing this moves the pivot to the middle
 	pivot = endS1 -1; //used to check for median
-	if (pivot == (length/2))	//length/2 gets the middle of the array
+	if (pivot == ((length-1)/2))	//length/2 gets the middle of the array
 	{
 		 medianFound = true;
 		 cout<<pivot;
