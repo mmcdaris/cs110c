@@ -1,3 +1,13 @@
+/*
+ Authors:    Morgan McDaris & Arthur Luk
+ Course:     cs110c
+ Instructor: Steve Abensohn
+ Assignment: Lab1 - modify a recursive function to find the median
+ Notes: you should check out our commit history :)
+ 	https://github.com/mmcdaris/cs110c/commits/master
+	we colaborated remotely using github to push to this repository!
+	talk to us about it if you are interested!
+*/
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
