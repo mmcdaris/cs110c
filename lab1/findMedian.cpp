@@ -117,8 +117,8 @@ void quickSort (int anArray[], int first, int last, int length, bool &medianFoun
 	// first is the start of the sub array, last is the end of the sub array
 	
 	int pivot = first;        // index of pivot
-	int startS1 = first +1;      // starting of S1, which is the index of elements in anArray which are less than the pivot
-	int endS1 = first +1;    // starting of S2, which is the index of elements in anArray which are greater than the pivot, this is also the end of S1
+	int startS1 = first;      // starting of S1, which is the index of elements in anArray which are less than the pivot
+	int endS1 = first + 1;    // starting of S2, which is the index of elements in anArray which are greater than the pivot, this is also the end of S1
                             
   // if first is equal to last, then we have hit a base case, this occures if there is only one element in the subarray and it is not the median
 
@@ -144,8 +144,8 @@ void quickSort (int anArray[], int first, int last, int length, bool &medianFoun
 	}
 	else
 	{
-		quickSort(anArray, first, endS1 - 2, length, medianFound); //quick sorts S1
-		quickSort(anArray, endS1, last, length, medianFound); //quick sorts S2
+		quickSort(anArray, first, pivot - 1, length, medianFound); //quick sorts S1
+		quickSort(anArray, pivot + 1, last, length, medianFound); //quick sorts S2
 	}
 	
 }
