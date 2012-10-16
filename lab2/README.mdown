@@ -8,3 +8,6 @@
   Read Programing Problem 5 Page 244
 **Step 2:**   
   Implement a LIST CLASS BASED on the [circularly doubly linked list](http://en.wikipedia.org/wiki/Doubly_linked_list#Circular_doubly_linked_lists) and a dummy head pointer
+
+
+THIS IS THE CHANGE THAT WILL BE MERGED WITH MY LOCAL VERSION
