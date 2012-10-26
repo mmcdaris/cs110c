@@ -1,0 +1,36 @@
+libcoregrind_amd64_darwin_a-sched-lock-generic.o \
+  libcoregrind_amd64_darwin_a-sched-lock-generic.o:  \
+ m_scheduler/sched-lock-generic.c pub_core_basics.h \
+  ../include/pub_tool_basics.h ../VEX/pub/libvex_basictypes.h \
+  /usr/llvm-gcc-4.2/bin/../lib/gcc/i686-apple-darwin11/4.2.1/include/stdarg.h \
+  ../VEX/pub/libvex.h ../VEX/pub/libvex_basictypes.h \
+  ../VEX/pub/libvex_ir.h ../VEX/pub/libvex_guest_amd64.h \
+  ../VEX/pub/libvex_emwarn.h ../include/pub_tool_mallocfree.h \
+  m_scheduler/priv_sema.h m_scheduler/priv_sched-lock.h \
+  m_scheduler/priv_sched-lock-impl.h
+
+pub_core_basics.h:
+
+../include/pub_tool_basics.h:
+
+../VEX/pub/libvex_basictypes.h:
+
+/usr/llvm-gcc-4.2/bin/../lib/gcc/i686-apple-darwin11/4.2.1/include/stdarg.h:
+
+../VEX/pub/libvex.h:
+
+../VEX/pub/libvex_basictypes.h:
+
+../VEX/pub/libvex_ir.h:
+
+../VEX/pub/libvex_guest_amd64.h:
+
+../VEX/pub/libvex_emwarn.h:
+
+../include/pub_tool_mallocfree.h:
+
+m_scheduler/priv_sema.h:
+
+m_scheduler/priv_sched-lock.h:
+
+m_scheduler/priv_sched-lock-impl.h:

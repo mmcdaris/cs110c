@@ -1,0 +1,47 @@
+// Morgan Mikel Mcdaris
+
+#include <stdlib.h>
+#include <iostream>
+#include "StackA.h"
+#include "QueueA.h"
+#include "<string>"
+
+using namespace std;
+
+bool isPal(string str);
+
+int main()
+{
+  for(int i = 5; i > 1; i--) 
+  {
+    string str;
+    cout << ": ";
+    cin >> str;
+    if(isPal(str))
+    {
+      cout << "\nbingo!";
+      i++;
+    }
+    else
+    {
+      cout << "\nNo Good!\n";
+      i--;
+    }
+    cout << "\033[1;36m"<< i << " Credits Left\n" << "\033[0m"; //cyan and back 
+  }
+
+  return 0;
+}
+
+bool isPal(string str)
+{
+  Queue que;
+  StacK stk;
+  for(int i = 0; i < str.length(); i++)
+  {
+    cout << str[i] << endl;
+    que.enque(str[i]);
+    stk.push(str[i]) 
+  }
+
+{
