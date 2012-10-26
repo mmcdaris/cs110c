@@ -1,2 +1,0 @@
-libcoregrind_amd64_darwin_a-coredump-elf.o \
-  libcoregrind_amd64_darwin_a-coredump-elf.o: m_coredump/coredump-elf.c

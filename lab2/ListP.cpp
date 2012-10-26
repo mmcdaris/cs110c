@@ -74,6 +74,10 @@ void List::display()
   cout << "Item(s): ";
   while(cur != head)
   {
+    
+    // cout << "<" << head->precede << "|" << "HEAD" << "|" << head->next << ">""<"<< cur->precede << "|"<< cur->item << "|" << cur->next << ">\n"; // cout the n->item
+    
+    
     cout << cur->item << " "; // cout the n->item
     cur = cur->next;   // until (n?)cur(dh)
   }
@@ -82,19 +86,19 @@ void List::display()
 
 void List::displayReverse()
 {
-  ListNode *cur = head;
+  ListNode *cur = head->precede;               //(nMAX-1)nMAX(n1) <-(nMAX)cur(..)  (nMax)n1(n2)
   cout << "Item(s) in reverse order: ";
-  while(cur->precede != head)
+  while(cur != head)
   {
-    cout << cur->precede->item << " ";   // cout the n1 item
-    cur = cur->precede;         // until (n?)cur(dh)
+    cout << cur->item << " ";          
+    cur = cur->precede;                        
   }
   cout << endl;
 } // end displayReverse
 
 bool List::isEmpty() const
 {
-   return size == 0;
+   return size == 1;
 }  // end isEmpty
 
 int List::getLength() const
@@ -152,14 +156,15 @@ void List::insert(int index, const ListItemType& newItem)
 	        newPtr->next = head; newPtr->precede = head;  // (   )dh(   ), (dh)nIn(dh)
 	        head->next = newPtr; head->precede = newPtr;  // (nIn)dh(nIn), (dh)nIn(dh)
 	      }
-	      else
+	      else // insert new node inbetween prev and prv->next
 	      {  
-          ListNode *prev = find(index-1);                     // find node at index -1 insert new node after, call it prev
-          newPtr->next = prev->next;
-          newPtr->precede = prev;                             // (dh)prev(next), (prev)nIn(next)
-	        prev->next = newPtr;                                // (dh)prev(nIn) , (prev)nIn(next)
-          head->precede = newPtr;                             // adjust the end!
-	      }  // end if
+          ListNode *prv = find(index-1);  // one behind index
+          newPtr->precede = prv;          // (prv)np()
+          newPtr->next = prv->next;       // (prv)np(prv->next)
+          prv->next = newPtr;             // (..)prv(np)(prv)np(prv->next)(prv)prv->next(..)
+          newPtr->next->precede = newPtr; // (..)prv(np)(prv)np(prv->next)(np)prv->next(..)
+	      }  
+      
       }  // end try
       catch (bad_alloc e)
       {
@@ -171,33 +176,30 @@ void List::insert(int index, const ListItemType& newItem)
 
 void List::remove(int index) throw(ListIndexOutOfRangeException)
 {
-   ListNode *cur;
+   ListNode *target;
 
    if ( (index < 1) || (index > getLength()) )
       throw ListIndexOutOfRangeException(
 	 "ListIndexOutOfRangeException: remove index out of range");
    else
-   {  --size;
-      if (index == 1)
-      {  // delete the first node from the list
-         cur = head->next;  // save pointer to node
-         head = head->next->next;
-         head->next->next->precede = head; // head is dh| dhn = n1, n1n = n2, n2p set to head!  
-      }
-
-      else
-      {  
-         ListNode *target = find(index);         // (..)n1(ta), (n1)ta(n3), (ta)n3(..) 
-         cur = target;                           // save target to cur for deletion         
-	       target->precede->next = target->next;   // (..)n1(n3), (n1)ta(n3), (ta)n3(..)
-         target->next->precede = target->precede; // (..)n1(n3), (n1)ta(n3), (n1)n3(..)
+   {  
+     target = find(index);
+     if (index == 1)
+     {  // delete the first node from the list
+        head->next = target->next;    // (nn)H(n2)..(h )T(n2)--(t )n2(n3) | >Hn->n2<>n3<>n4<>n5<
+        head->next->precede = head;   // (nn)H(n2)..(h )T(n2)..(H )n2(n3) | >Hn<>n2<>n3<>n4<>n5<
+     }  
+     else
+     {  
+	      target->precede->next = target->next;    // (..)n1(n3), (n1)ta(n3), (ta)n3(..)
+        target->next->precede = target->precede; // (..)n1(n3), (n1)ta(n3), (n1)n3(..)
                                                  // (..)n1(n3), (n1)n3(..)      | to be deleted: (n1)ta(n3)
-      }  // end if
-
+     }  // end if
+      
       // return node to system
-      cur->next = NULL;
-      cur->precede = NULL;
-      delete cur;
-      cur = NULL;
-   }  // end if
+      target->next = NULL;
+      target->precede = NULL;
+      delete target;
+      target = NULL;
+   }  --size;// end if
 }  // end remove

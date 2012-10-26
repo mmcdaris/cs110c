@@ -1,2 +1,0 @@
-cachegrind_x86_darwin-cg-s390x.o cachegrind_x86_darwin-cg-s390x.o:  \
- cg-s390x.c

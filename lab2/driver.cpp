@@ -33,7 +33,9 @@ int main()
       cin.clear();
       cin >> yn;
       if(!(yn[0] == 'y')) // must be 'y', "y" raises a compile error
+      { 
         escape = true;
+      }
     }
   }
   return(0);
@@ -42,7 +44,7 @@ int main()
 
 void prompt()
 {
- cout << "1) Insert Item(s)\n2) Delete Item\n3) Exit\nPlease enter your choice: ";
+ cout << "\n1) Insert Item(s)\n2) Delete Item\n3) Exit\nPlease enter your choice: ";
 }
 
 void response(int choice, List &myList)
@@ -58,6 +60,7 @@ void response(int choice, List &myList)
         string data;                            
         cout << "Enter number of items to insert: ";      
         cin >> num;
+          if(num > 10){num = 10;}
         cout << "Enter items to insert: ";
         for(int i = 0; i != num; i++)         
         {                                         
@@ -97,7 +100,7 @@ int getValidPos(int mx, int choice)
     else // (extra == true)
     {
       if(choice == 1)
-        cout << "Out of Range\nEnter position of insert(" << 1 << "-" << p << "): ";
+        cout << "Out of Range\nEnter position of insert(" << 1 << "-" << p+1 << "): ";
       else
         cout << "Out of Range\nEnter item number to delete(" << 1 << "-" << p << "): ";
     }
@@ -107,3 +110,67 @@ int getValidPos(int mx, int choice)
   }
   return pos;
 }
+/*
+Program Output:
+1) Insert Item(s)
+2) Delete Item
+3) Exit
+Please enter your choice: 1
+Enter position of insert: 1
+Enter number of items to insert: 4
+Enter items to insert: California Nevada Utah Colorado
+Item(s): California Nevada Utah Colorado 
+Item(s) in reverse order: Colorado Utah Nevada California 
+Go again (y/n)? y
+
+1) Insert Item(s)
+2) Delete Item
+3) Exit
+Please enter your choice: 2
+Enter item number to delete: 3
+Item(s): California Nevada Colorado 
+Item(s) in reverse order: Colorado Nevada California 
+Go again (y/n)? y
+
+1) Insert Item(s)
+2) Delete Item
+3) Exit
+Please enter your choice: 2
+Enter item number to delete: 3
+Item(s): California Nevada 
+Item(s) in reverse order: Nevada California 
+Go again (y/n)? y
+
+1) Insert Item(s)
+2) Delete Item
+3) Exit
+Please enter your choice: 1
+Enter position of insert: 4
+Out of Range
+Enter position of insert(1-3): 2
+Enter number of items to insert: 3
+Enter items to insert: Idaho Montana Wyoming
+Item(s): California Idaho Montana Wyoming Nevada 
+Item(s) in reverse order: Nevada Wyoming Montana Idaho California 
+Go again (y/n)? y
+
+1) Insert Item(s)
+2) Delete Item
+3) Exit
+Please enter your choice: 2
+Enter item number to delete: 0
+Out of Range
+Enter item number to delete(1-5): 1
+Item(s): Idaho Montana Wyoming Nevada 
+Item(s) in reverse order: Nevada Wyoming Montana Idaho 
+Go again (y/n)? y
+
+1) Insert Item(s)
+2) Delete Item
+3) Exit
+Please enter your choice: 2
+Enter item number to delete: 2
+Item(s): Idaho Wyoming Nevada 
+Item(s) in reverse order: Nevada Wyoming Idaho 
+Go again (y/n)? n
+*/

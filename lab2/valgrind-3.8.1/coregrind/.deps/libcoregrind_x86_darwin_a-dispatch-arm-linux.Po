@@ -1,3 +1,0 @@
-libcoregrind_x86_darwin_a-dispatch-arm-linux.o \
-  libcoregrind_x86_darwin_a-dispatch-arm-linux.o:  \
- m_dispatch/dispatch-arm-linux.S
