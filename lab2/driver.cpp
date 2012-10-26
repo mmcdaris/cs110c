@@ -5,25 +5,29 @@
 #include "ListP.h"
 using namespace std;
 
-int prompt();
-void response(int choice, List myslist);
+void prompt();
+void response(int choice, List &myslist);
+int  getValidPos(int mx, int choice);
 
 int main()
 {
   int choice = 0;           // holds user's choice 
   bool escape = false;      // controls escape
-  string yn;
-  List myList; 
-  
+  string yn;                // used for choices
+  List myList;              // make a new list
 
   while (escape == false)
   {
-    choice = prompt();
-    if(choice > 0)
+    prompt();
+    cin.clear();
+    cin >> choice;
+    if((choice == 2) || (choice == 1))
       response(choice, myList);
-    else if(choice == 0)
+    
+    else if(choice == 3)
       escape = true;
-    else
+
+    if(escape != true)
     {
       cout << "Go again (y/n)? "; // continue?
       cin.clear();
@@ -32,62 +36,74 @@ int main()
         escape = true;
     }
   }
-
   return(0);
 
 }
 
-int prompt()
+void prompt()
 {
- int choice = 0;
  cout << "1) Insert Item(s)\n2) Delete Item\n3) Exit\nPlease enter your choice: ";
- cin >> choice;
- return choice;
 }
 
-void response(int choice, List myList)
+void response(int choice, List &myList)
 {
-  int pos = 9999, num = 0, mx = myList.getLength();
-  bool extra = false;
-  if(choice == 1) // add to the list at the pos
-  {  
-     while(pos > mx)
-     {
-    
-      if(extra == false)
+  int num = 0, mx = myList.getLength(), pos = (mx+1);
+  /*--getValidPosition-------------------*/
+    pos = getValidPos(mx, choice);        
+  /*---------add/delete/how-many---------*/
+      
+      /*---insertion-section--------*/
+      if(choice == 1)
       {
-        cout << "Enter position of insert: ";
-      }
-      else
+        string data;                            
+        cout << "Enter number of items to insert: ";      
+        cin >> num;
+        cout << "Enter items to insert: ";
+        for(int i = 0; i != num; i++)         
+        {                                         
+          cin >> data;
+          myList.insert(pos + i, data);
+        }                                       
+      } 
+      else/*----deletion-section--------*/
       {
-        cout << "Enter position of insert(" << 1 << "-" << mx << "): ";
+        // cout << "Enter item number to delete: ";                                           
+        if(mx != 0)
+          myList.remove(pos);
+        else
+          cout << "nothing to remove, check for yourself!\n";
       }
 
-      cin >> pos;
-      extra = false;
-    
-      if(pos > mx || pos < 1)
-      {
-        cout << "Out of Range";
-        extra = true;
-      }
+      myList.display();
+      myList.displayReverse();
+      mx = myList.getLength();
+}
+
+int getValidPos(int mx, int choice)
+{
+  bool extra = false;
+  int p = mx; int pos = 0;
+  if(mx == 0){ p++; }
+
+  while(pos > mx+1 || pos < 1)
+  {
+    if(extra == false)
+    {
+      if(choice == 1)
+        cout << "Enter position of insert: ";
       else
-      {
-        string data;
-        cout << "Enter items to insert: ";
-        for(int in = pos; in > num; in++)
-        {
-         cin >> data;
-         myList.insert(pos, data);
-  
-        }
-      }
+        cout << "Enter item number to delete: ";
     }
+    else // (extra == true)
+    {
+      if(choice == 1)
+        cout << "Out of Range\nEnter position of insert(" << 1 << "-" << p << "): ";
+      else
+        cout << "Out of Range\nEnter item number to delete(" << 1 << "-" << p << "): ";
+    }
+    extra = true;
+    cin.clear();
+    cin >> pos;
   }
- else // delete an element at a pos
- {
-  
- }
- myList.display();
- myList.displayReverse();
+  return pos;
 }

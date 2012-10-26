@@ -17,8 +17,16 @@ using namespace std;
 //     |_____________________________________|
 //
 
-List::List(const List& aList)
-   : size(aList.size)
+List::List()
+{
+  head = new ListNode;
+  head->next = head;    
+  head->precede = head;
+  size = 0;
+
+}
+
+List::List(const List& aList) : size(aList.size)
 {
    if (aList.head == NULL)
    {
@@ -62,26 +70,26 @@ List::~List()
 
 void List::display()
 {
-  ListNode *cur = head->precede;  // cur = (nMAX-1)nMAX(dh)
+  ListNode *cur = head->next;  // cur = (nMAX-1)nMAX(dh)
   cout << "Item(s): ";
   while(cur != head)
   {
-    cout << cur->item; // cout the n->item
-    cur = cur->precede;   // until (n?)cur(dh)
+    cout << cur->item << " "; // cout the n->item
+    cur = cur->next;   // until (n?)cur(dh)
   }
-
+  cout << endl;
 } // end display
 
 void List::displayReverse()
 {
-
-  ListNode *cur = head->next;
-  cout << "Item(s): ";
-  while(cur != head)
+  ListNode *cur = head;
+  cout << "Item(s) in reverse order: ";
+  while(cur->precede != head)
   {
-    cout << cur->item; // cout the n1 item
-    cur = cur->next;   // until (n?)cur(dh)
+    cout << cur->precede->item << " ";   // cout the n1 item
+    cur = cur->precede;         // until (n?)cur(dh)
   }
+  cout << endl;
 } // end displayReverse
 
 bool List::isEmpty() const
@@ -134,27 +142,29 @@ void List::insert(int index, const ListItemType& newItem)
    {  // try to create new node and place newItem in it
       try
       {
-	 ListNode *newPtr = new ListNode;                // newPtr = ()nIn()
-	 size = newLength;                               // size++ :)
-	 newPtr->item = newItem;                         // nIn->item = newItem
+	      ListNode *newPtr = new ListNode;                // newPtr = ()nIn()
+	      size = newLength;                               // size++ :)
+	      newPtr->item = newItem;                         // nIn->item = newItem
 
-	 // attach new node to list
-	 if (index == 1)
-	 {  // insert new node at beginning of list
-	    newPtr->next = head; newPtr->precede = head;  // (   )dh(   ), (dh)nIn(dh)
-	    head->next = newPtr; head->precede = newPtr;  // (nIn)dh(nIn), (dh)nIn(dh)
-	 }
-	 else
-	 {  
-      ListNode *prev = find(index-1);                     // find node at index -1 insert new node after, call it prev
-      newPtr->next = prev->next; newPtr->precede = prev;  // (dh)prev(next), (prev)nIn(next)
-	    prev->next = newPtr;                                // (dh)prev(nIn) , (prev)nIn(next)
-	 }  // end if
+	      // attach new node to list
+	      if (index == 1)
+	      {  // insert new node at beginning of list
+	        newPtr->next = head; newPtr->precede = head;  // (   )dh(   ), (dh)nIn(dh)
+	        head->next = newPtr; head->precede = newPtr;  // (nIn)dh(nIn), (dh)nIn(dh)
+	      }
+	      else
+	      {  
+          ListNode *prev = find(index-1);                     // find node at index -1 insert new node after, call it prev
+          newPtr->next = prev->next;
+          newPtr->precede = prev;                             // (dh)prev(next), (prev)nIn(next)
+	        prev->next = newPtr;                                // (dh)prev(nIn) , (prev)nIn(next)
+          head->precede = newPtr;                             // adjust the end!
+	      }  // end if
       }  // end try
       catch (bad_alloc e)
       {
-	 throw ListException(
-	    "ListException: memory allocation failed on insert");
+	      throw ListException(
+	        "ListException: memory allocation failed on insert");
       }  // end catch
    }  // end if
 }  // end insert

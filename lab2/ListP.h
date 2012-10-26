@@ -1,3 +1,5 @@
+#ifndef __LISTP_H__
+#define __LISTP_H__
 /** @file ListP.h */
 
 #include "ListException.h"
@@ -61,3 +63,5 @@ private:
    ListNode *find(int index) const;
 }; // end List
 // End of header file.
+
+#endif
