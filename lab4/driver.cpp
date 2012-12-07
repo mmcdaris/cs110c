@@ -1,4 +1,4 @@
-#include "StackA.h"
+#include "QueueA.h"
 #include <iostream>
 #include <string>
 
@@ -16,7 +16,7 @@ int main()
   int number;
 
   /*  queue creation  */
-  theQueue = queue.new;
+  theQueue = Queue;
   
   while(choice != 3)
   {
@@ -28,7 +28,7 @@ int main()
       {
         cout << insert;
         cin >> number; 
-        theQueue.insert(number);
+        theQueue.enqueue(number);
       } 
       else
         cout << inError;   
@@ -39,7 +39,7 @@ int main()
     {
       if(theQueue.size() != 0)
       {
-        theQueue.remove();
+        theQueue.dequeue();
         theQueue.display();
       }
       else
