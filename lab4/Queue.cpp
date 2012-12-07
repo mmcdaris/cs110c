@@ -4,6 +4,8 @@
  * queue. A counter tracks the number of items currently
  * in the queue. */
 
+#include <iostream>
+#include <new>
 #include "Queue.h"  // header file
 
 Queue::Queue() : front(0), back(MAX_QUEUE-1), count(0)
@@ -13,8 +15,8 @@ Queue::Queue() : front(0), back(MAX_QUEUE-1), count(0)
 bool Queue::isEmpty() const
 {
    return count == 0;
-}  // end isEmpty
-
+  // end isEmpty
+}
 void Queue::enqueue(const QueueItemType& newItem)
    throw(QueueException)
 {
@@ -65,4 +67,28 @@ void Queue::getFront(QueueItemType& queueFront) const
       // queue is not empty; retrieve front
       queueFront = items[front];
 }  // end getFront
+
+void Queue::display()
+{
+  bool test = isEmpty();
+  if( test )
+  {  } 
+  else
+  {
+    for(int i = 0; i < count; i++)
+    { 
+      cout << items[i] << " ";
+    } // end of for
+  } // end of else
+} // end display
+
+int Queue::capacity()
+{
+  return MAX_QUEUE;
+}
+
+int Queue::size()
+{
+  return count;
+}
 // End of implementation file.

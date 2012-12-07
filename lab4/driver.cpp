@@ -1,22 +1,22 @@
-#include "QueueA.h"
-#include <iostream>
+#include "Queue.h"
 #include <string>
+#include <iostream>
 
 using namespace std;
 
 int main()
 {
   /*  string prompts  */
-  string    prompt = "1) Add item to queue\n2) Remove item from queue\n3) Exit program\nEnter your Selection (1-3): ",
-            insert = "Enter item to insert: ",
-           rmError = "Unable to remove item from empty queue",
-           inError = "Unable to instert into full queue"
+  string prompt = "1) Add item to queue\n2) Remove item from queue\n3) Exit program\nEnter your Selection (1-3): ";
+  string insert = "Enter item to insert: ";
+  string rmError = "Unable to remove item from empty queue\n";
+  string inError = "Unable to instert into full queue\n";
   /*  ints for flow control and temp  */
   int choice;
   int number;
 
   /*  queue creation  */
-  theQueue = Queue;
+  Queue theQueue;
   
   while(choice != 3)
   {
@@ -53,4 +53,5 @@ int main()
  
   return(0);
 }
+
 

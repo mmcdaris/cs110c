@@ -1,8 +1,11 @@
+#ifndef __Queue__
+#define __Queue__
+
 /** @file Queue.h */
 
 #include "QueueException.h"
-const int MAX_QUEUE = maximum-size-of-queue;
-typedef desired-type-of-queue-item QueueItemType;
+const int MAX_QUEUE = 4; // MAX_QUEUE is 4
+typedef int QueueItemType; // QueueItemType is integer
 
 /** @class Queue
  * ADT queue - Array-based implementation. */
@@ -25,6 +28,7 @@ public:
    void getFront(QueueItemType& queueFront) const
       throw(QueueException);
    int capacity();
+   int size();
    void display();
 private:
    QueueItemType items[MAX_QUEUE];
@@ -33,3 +37,5 @@ private:
    int           count;
 }; // end Queue
 // End of header file.
+
+#endif
